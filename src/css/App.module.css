@@ -1,0 +1,330 @@
+:root {
+    --accent: #00aaff;
+    --accent-600: #007fcc;
+    --bg-deep: #071226;
+    --bg-surface: rgba(255, 255, 255, 0.02);
+    --muted: rgba(255, 255, 255, 0.7);
+}
+
+/* Top header layout (desktop) */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1rem auto;
+    max-width: 1100px;
+    width: calc(100% - 2rem);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--muted);
+}
+
+.logo {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    font-size: 1.15rem;
+}
+
+.appContainer {
+    max-width: 1100px;
+    margin: 0.8rem auto 4.2rem;
+    /* bottom reserved for bottom nav on mobile */
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    background: linear-gradient(180deg, var(--bg-surface), rgba(255, 255, 255, 0.01));
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.18);
+}
+
+.listGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Top nav for larger screens */
+.topNav {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
+
+.navLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 600;
+    transition: all 150ms ease;
+}
+
+.navLink:hover {
+    transform: translateY(-3px);
+    color: white
+}
+
+.active {
+    background: white;
+    color: var(--accent);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Bottom navigation (mobile) */
+.bottomNav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 12px;
+    padding: 8px 10px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    border-radius: 14px;
+    box-shadow: 0 12px 36px rgba(2, 6, 23, 0.35);
+    z-index: 1000;
+}
+
+.bottomNavItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--muted);
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.bottomNavIcon {
+    font-size: 18px
+}
+
+.bottomActive {
+    color: white;
+    background: linear-gradient(180deg, var(--accent), var(--accent-600));
+    padding: 6px;
+    border-radius: 10px
+}
+
+/* FAB */
+.fab {
+    position: fixed;
+    right: 18px;
+    bottom: 78px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, var(--accent), var(--accent-600));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 14px 42px rgba(2, 6, 23, 0.36);
+    border: none
+}
+
+/* Modal */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1200
+}
+
+.modal {
+    width: min(640px, calc(100% - 2rem));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    padding: 1rem;
+    border-radius: 12px
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem
+}
+
+.modal input,
+.modal textarea {
+    padding: 0.6rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: transparent;
+    color: inherit
+}
+
+.actions {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: flex-end;
+    margin-top: 0.6rem
+}
+
+.btn {
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer
+}
+
+.prim {
+    background: var(--accent);
+    color: white
+}
+
+.ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid rgba(255, 255, 255, 0.04)
+}
+
+/* Modal enter/exit animations */
+.modal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 180ms ease, transform 180ms ease
+}
+
+.modal.opening {
+    opacity: 1;
+    transform: translateY(0)
+}
+
+.modal.closing {
+    opacity: 0;
+    transform: translateY(10px)
+}
+
+/* Responsive rules */
+@media (max-width: 640px) {
+    .topNav {
+        display: none
+    }
+
+    .header {
+        padding: 0 6px
+    }
+
+    .fab {
+        bottom: 88px
+    }
+}
+
+@media (min-width: 641px) {
+    .bottomNav {
+        display: none
+    }
+}
+
+/* Floating Action Button (FAB) */
+.fab {
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, var(--brand), #0077cc);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+    border: none;
+    cursor: pointer;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.fab:active {
+    transform: translateY(1px)
+}
+
+.fab:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32)
+}
+
+/* Modal overlay and dialog */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1200;
+}
+
+.modal {
+    width: min(640px, calc(100% - 2rem));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    padding: 1.2rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 18px 48px rgba(2, 6, 23, 0.6);
+    color: #eaf4ff;
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem
+}
+
+.modal .row {
+    display: flex;
+    gap: 0.6rem
+}
+
+.modal input,
+.modal textarea {
+    padding: 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+    color: inherit
+}
+
+.modal .actions {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: flex-end;
+    margin-top: 0.6rem
+}
+
+.btn {
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer
+}
+
+.btn.prim {
+    background: var(--brand);
+    color: white
+}
+
+.btn.ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid rgba(255, 255, 255, 0.04)
+}
