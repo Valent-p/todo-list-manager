@@ -1,11 +1,4 @@
-class Item {
-    id = null;
-    updateTime = null;
-    createTime = null;
-    title = null;
-    description = null;
-    doneNote = null;
-}
+
 
 const data = JSON.parse(localStorage.getItem('todo-list-manager-data')) || {
     items: {

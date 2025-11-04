@@ -1,6 +1,3 @@
-//import { useState } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
 import { useState, useRef, useEffect } from 'react';
 import styles from './css/App.module.css';
 import { BrowserRouter, NavLink, Routes, Route } from 'react-router-dom';
@@ -13,6 +10,7 @@ function App() {
 
   // in-memory items store with unique ids
   const [items, setItems] = useState(() => get_all());
+  // Removed `update` state as it's no longer necessary with proper state updates.
 
   const done_items = Object.values(items).filter(item => item.isDone);
   const not_done_items = Object.values(items).filter(item => !item.isDone);
@@ -34,20 +32,25 @@ function App() {
   function addItem({ title, description }) {
     const newItem = { title, description, isDone: false, doneNote: '' };
     save(newItem);
-    setItems(get_all());
+    setItems(get_all()); // get_all already returns a fresh object
   }
 
   function toggleItem(id) {
-    items[id].isDone = !items[id].isDone;
-    save_all(items);
-    setItems(get_all());
+    // Create a new items object
+    const updatedItems = { ...items };
+    updatedItems[id].isDone = !updatedItems[id].isDone;
+    save_all(updatedItems); // Save the updated items object
+    setItems(updatedItems); // Set the new items object to state
+    // No need for setUpdate(update+1) anymore
   }
 
   function removeItem(id) {
-    alert("To remove:" + items[id])
-    delete items[id];
-    setItems(items);
-    save_all(items);
+    // Create a new items object without the removed item
+    const updatedItems = { ...items };
+    delete updatedItems[id];
+    save_all(updatedItems); // Save the updated items object
+    setItems(updatedItems); // Set the new items object to state
+    // No need for setUpdate(update+1) anymore
   }
 
   useEffect(() => {
@@ -130,7 +133,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<p>Hello</p>} />
-          <Route path="/all" element={<ListingPage pageTitle="All Items" items={items} onToggle={toggleItem} onRemove={removeItem} />} />
+          <Route path="/all" element={<ListingPage pageTitle="All Items" items={Object.values(items)} onToggle={toggleItem} onRemove={removeItem} />} />
           <Route path="/done" element={<ListingPage pageTitle="Completed Items" items={done_items} onToggle={toggleItem} onRemove={removeItem} />} />
           <Route path="/not-done" element={<ListingPage pageTitle="Not Completed Items" items={not_done_items} onToggle={toggleItem} onRemove={removeItem} />} />
         </Routes>
