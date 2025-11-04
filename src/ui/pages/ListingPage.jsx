@@ -9,7 +9,7 @@ function ListingPage({pageTitle, items, onToggle, onRemove}) {
             </div>
 
             <div className={appStyles.listGrid}>
-                {items.map(item => (
+                {Object.values(items).map(item => (
                     <ListItem
                         key={item.id}
                         id={item.id}
